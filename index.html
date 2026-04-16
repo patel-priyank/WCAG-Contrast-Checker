@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WCAG Contrast Checker</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css"
+    />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+
+  <body>
+    <div class="screen-size-overlay" id="screen-size-overlay">
+      <div class="screen-size-overlay__content">
+        <i class="ph ph-desktop"></i>
+        <p>This tool requires a screen width of at least <strong>1100px</strong> to use.</p>
+        <p class="screen-size-overlay__current">Current width: <span id="current-width"></span>px</p>
+      </div>
+    </div>
+
+    <header>
+      <h1>WCAG Contrast Checker</h1>
+    </header>
+
+    <div class="main">
+      <div class="toolbar">
+        <span class="count-label" id="count-label">1 palette</span>
+        <button class="add-btn" onclick="addPalette()">Add palette</button>
+      </div>
+
+      <div class="palette-list" id="palette-list"></div>
+    </div>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
