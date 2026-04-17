@@ -89,6 +89,10 @@ header {
   transition: opacity 0.15s;
 }
 
+.theme-toggle-btn {
+  align-self: stretch;
+}
+
 .theme-toggle-btn:hover,
 .github-btn:hover {
   opacity: 0.8;

@@ -15,3 +15,4 @@ A browser-based tool for checking color palette contrast ratios against WCAG 2.1
 | bg         | accent     |
 | bgAlt      | accent     |
 | bg         | text       |
+| bgAlt      | text       |

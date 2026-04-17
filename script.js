@@ -7,7 +7,8 @@ const PAIRS = [
   { fgKey: 'accent', bgKey: 'bgAlt', fgLabel: 'accent', bgLabel: 'bgAlt' },
   { fgKey: 'bg', bgKey: 'accent', fgLabel: 'bg', bgLabel: 'accent' },
   { fgKey: 'bgAlt', bgKey: 'accent', fgLabel: 'bgAlt', bgLabel: 'accent' },
-  { fgKey: 'bg', bgKey: 'text', fgLabel: 'bg', bgLabel: 'text' }
+  { fgKey: 'bg', bgKey: 'text', fgLabel: 'bg', bgLabel: 'text' },
+  { fgKey: 'bgAlt', bgKey: 'text', fgLabel: 'bgAlt', bgLabel: 'text' }
 ];
 
 const LEVELS = [
@@ -294,7 +295,7 @@ const paletteHtml = p => {
         <button class="remove-palette-btn" onclick="removePalette(${p.id})">Remove</button>
       </div>
       <div class="color-inputs-row">${SLOTS.map(s => colorSlotHtml(p, s)).join('')}</div>
-      <div class="format-hint"><i class="ph ph-info"></i>Accepts hex (#RGB, #RRGGBB) or hsl(h, s%, l%)</div>
+      <div class="format-hint"><i class="ph ph-info"></i>Accepts hex (#rgb, #rrggbb) or hsl(h, s%, l%)</div>
       <div class="results-area">
         <table class="results-table">
           <thead>
@@ -566,7 +567,7 @@ const applyTheme = pref => {
   const label = document.getElementById('theme-label');
 
   if (label) {
-    label.textContent = pref === 'dark' ? 'Light mode' : 'Dark mode';
+    label.className = pref === 'dark' ? 'ph ph-sun' : 'ph ph-moon';
   }
 };
 
