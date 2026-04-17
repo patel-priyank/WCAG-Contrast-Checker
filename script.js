@@ -225,7 +225,7 @@ const tableRow = (pair, parsed) => {
 
   const r = fg && bg ? ratio(fg, bg) : null;
 
-  const ratioStr = r ? r.toFixed(2) + ':1' : '—';
+  const ratioStr = r ? r.toFixed(2) + ' : 1' : '—';
 
   const pills = LEVELS.map(l => {
     const pass = r ? r >= l.threshold : null;
@@ -251,7 +251,7 @@ const tableRow = (pair, parsed) => {
 const colorSlotHtml = (p, s) => {
   const col = parseColor(p.colors[s.key]);
   const hex = col ? col.hex : '#888888';
-  const invalid = p.colors[s.key] && !col ? 'invalid' : '';
+  const invalid = !col ? 'invalid' : '';
 
   return `
     <div class="color-slot ${invalid}">
@@ -261,7 +261,7 @@ const colorSlotHtml = (p, s) => {
           <input type="color" value="${hex}" oninput="onPick(${p.id},'${s.key}',this.value)">
         </div>
         <span class="swatch-values">
-          <span class="swatch-hex" id="sh-hex-${p.id}-${s.key}">${hex}</span>
+          <span class="swatch-hex" id="sh-hex-${p.id}-${s.key}" style="color:${col ? 'var(--text-muted)' : 'var(--fail-text)'}">${hex}</span>
           <span class="swatch-hsl" id="sh-hsl-${p.id}-${s.key}">${col ? toHsl(col) : ''}</span>
         </span>
       </div>
@@ -455,7 +455,7 @@ const refreshPalette = id => {
     const inp = document.getElementById(`ci-${id}-${s.key}`);
 
     if (inp) {
-      inp.closest('.color-slot').classList.toggle('invalid', !!(p.colors[s.key] && !col));
+      inp.closest('.color-slot').classList.toggle('invalid', !col);
     }
   });
 
