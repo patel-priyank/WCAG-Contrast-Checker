@@ -98,11 +98,11 @@ header {
   letter-spacing: 0.06em;
   color: var(--text-muted);
   cursor: pointer;
-  transition: background 0.15s;
+  transition: backdrop-filter 0.15s;
 }
 
 .coffee-btn:hover {
-  background: var(--bg);
+  backdrop-filter: brightness(1.5);
 }
 
 .coffee-btn .ph {
