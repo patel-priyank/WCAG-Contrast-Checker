@@ -24,14 +24,19 @@
     <header>
       <h1>WCAG Contrast Checker</h1>
 
-      <div class="theme-toggle">
-        <button class="theme-btn" data-theme="light" onclick="setTheme('light')" title="Light">
-          <i class="ph ph-sun"></i>
+      <div class="header-right">
+        <button class="theme-toggle-btn" id="theme-toggle-btn" onclick="toggleTheme()">
+          <span id="theme-label">Dark mode</span>
         </button>
 
-        <button class="theme-btn" data-theme="dark" onclick="setTheme('dark')" title="Dark">
-          <i class="ph ph-moon"></i>
-        </button>
+        <a
+          href="https://github.com/patel-priyank/WCAG-Contrast-Checker"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="github-btn"
+        >
+          Source code
+        </a>
       </div>
     </header>
 

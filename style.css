@@ -65,37 +65,33 @@ header {
   gap: 1.5rem;
 }
 
-.theme-toggle {
+.header-right {
   display: flex;
   align-items: center;
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  overflow: hidden;
+  gap: 0.75rem;
   flex-shrink: 0;
 }
 
-.theme-btn {
+.theme-toggle-btn,
+.github-btn {
   display: flex;
-  background: transparent;
+  align-items: center;
+  background: var(--text);
+  color: var(--bg);
   border: none;
-  color: var(--text-faint);
+  padding: 10px 18px;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
   cursor: pointer;
-  padding: 10px 16px;
-  font-size: 1.25rem;
-  line-height: 1;
-  transition:
-    background 0.15s,
-    color 0.15s;
+  border-radius: 2px;
+  text-decoration: none;
+  transition: opacity 0.15s;
 }
 
-.theme-btn:hover {
-  color: var(--text-muted);
-  background: var(--border-light);
-}
-
-.theme-btn.active {
-  background: var(--border);
-  color: var(--text);
+.theme-toggle-btn:hover,
+.github-btn:hover {
+  opacity: 0.8;
 }
 
 header h1 {

@@ -546,14 +546,21 @@ const THEME_KEY = 'contrast-checker-theme';
 const applyTheme = pref => {
   document.documentElement.setAttribute('data-theme', pref);
 
-  document.querySelectorAll('.theme-btn').forEach(btn => {
-    btn.classList.toggle('active', btn.dataset.theme === pref);
-  });
+  const label = document.getElementById('theme-label');
+
+  if (label) {
+    label.textContent = pref === 'dark' ? 'Light mode' : 'Dark mode';
+  }
 };
 
 const setTheme = pref => {
   localStorage.setItem(THEME_KEY, pref);
   applyTheme(pref);
+};
+
+const toggleTheme = () => {
+  const current = document.documentElement.getAttribute('data-theme');
+  setTheme(current === 'dark' ? 'light' : 'dark');
 };
 
 applyTheme(
