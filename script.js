@@ -80,9 +80,9 @@ const stored = loadFromStorage();
 let palettes = stored?.palettes ?? [
   {
     id: 1,
-    name: 'New palette',
+    name: 'Palette 1',
     collapsed: false,
-    colors: { bg: '#FFFFFF', bgAlt: '#F3F4F6', text: '#111827', textMuted: '#6B7280', accent: '#2563EB' }
+    colors: { bg: '#000', bgAlt: '#3a3a3a', text: '#fff', textMuted: '#ccc', accent: 'hsl(200, 80%, 80%)' }
   }
 ];
 
@@ -290,7 +290,7 @@ const paletteHtml = p => {
         <button class="collapse-btn" onclick="toggleCollapse(${p.id})" aria-label="${p.collapsed ? 'Expand' : 'Collapse'} palette">
           <i class="ph ph-caret-down"></i>
         </button>
-        <input class="palette-name-input" type="text" value="${p.name}" placeholder="Palette name…" oninput="onName(${p.id},this.value)">
+        <input class="palette-name-input" type="text" value="${p.name}" placeholder="Palette name" oninput="onName(${p.id},this.value)">
         <button class="remove-palette-btn" onclick="removePalette(${p.id})">Remove</button>
       </div>
       <div class="color-inputs-row">${SLOTS.map(s => colorSlotHtml(p, s)).join('')}</div>
@@ -357,8 +357,16 @@ const importPalettes = () => {
         const data = JSON.parse(e.target.result);
         const imported = Array.isArray(data) ? data : null;
 
-        if (!imported || !imported.every(p => p.id && p.colors)) {
+        if (!imported || imported.length === 0 || !imported.every(p => p.id && p.colors)) {
           alert('Invalid palette file.');
+          return;
+        }
+
+        if (
+          !confirm(
+            `Import ${imported.length} palette${imported.length !== 1 ? 's' : ''}? This will replace your current palettes.`
+          )
+        ) {
           return;
         }
 
@@ -505,10 +513,13 @@ const onName = (id, val) => {
 };
 
 const addPalette = () => {
+  const id = nextId++;
+  const n = palettes.length + 1;
+
   palettes.push({
-    id: nextId++,
-    name: 'New palette',
-    colors: { bg: '#FFFFFF', bgAlt: '#F3F4F6', text: '#111827', textMuted: '#6B7280', accent: '#2563EB' }
+    id,
+    name: `Palette ${n}`,
+    colors: { bg: '#000', bgAlt: '#3a3a3a', text: '#fff', textMuted: '#ccc', accent: 'hsl(200, 80%, 80%)' }
   });
 
   saveToStorage();
@@ -523,6 +534,12 @@ const addPalette = () => {
 
 const removePalette = id => {
   if (palettes.length === 1) {
+    return;
+  }
+
+  const p = palettes.find(x => x.id === id);
+
+  if (!confirm(`Remove ${p?.name?.trim() ? `"${p.name.trim()}"` : 'this palette'}?`)) {
     return;
   }
 

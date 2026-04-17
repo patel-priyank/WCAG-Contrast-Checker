@@ -250,7 +250,6 @@ header h1 {
   border-bottom: none;
 }
 
-.palette-card.collapsed .remove-palette-btn,
 .palette-list > .palette-card:only-child .remove-palette-btn {
   display: none;
 }
