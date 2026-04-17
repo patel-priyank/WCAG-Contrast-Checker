@@ -313,7 +313,7 @@ const refreshPalette = id => {
   });
 
   SLOTS.forEach(s => {
-    const col = parseColor(p.colors[s.key]);
+    const col = parsed[s.key];
     const hex = col ? col.hex : '#888888';
 
     const btn = document
