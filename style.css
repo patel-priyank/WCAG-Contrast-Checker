@@ -71,6 +71,51 @@ header h1 {
   color: var(--text-muted);
 }
 
+.toolbar-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.io-btn-group {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.io-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  border-right: 1px solid var(--border);
+  padding: 10px 14px;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition:
+    background 0.15s,
+    color 0.15s;
+}
+
+.io-btn:last-child {
+  border-right: none;
+}
+
+.io-btn:hover {
+  background: var(--border-light);
+  color: var(--text);
+}
+
+.io-btn .ph {
+  font-size: 1rem;
+}
+
 .add-btn {
   display: flex;
   align-items: center;

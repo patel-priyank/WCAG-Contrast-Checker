@@ -28,7 +28,16 @@
     <div class="main">
       <div class="toolbar">
         <span class="count-label" id="count-label">1 palette</span>
-        <button class="add-btn" onclick="addPalette()">Add palette</button>
+
+        <div class="toolbar-right">
+          <div class="io-btn-group">
+            <button class="io-btn" onclick="exportPalettes()"><i class="ph ph-upload-simple"></i>Export</button>
+
+            <button class="io-btn" onclick="importPalettes()"><i class="ph ph-download-simple"></i>Import</button>
+          </div>
+
+          <button class="add-btn" onclick="addPalette()">Add palette</button>
+        </div>
       </div>
 
       <div class="palette-list" id="palette-list"></div>

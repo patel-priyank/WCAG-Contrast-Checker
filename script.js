@@ -297,6 +297,60 @@ const paletteHtml = p => {
   `;
 };
 
+const exportPalettes = () => {
+  const json = JSON.stringify(palettes, null, 2);
+
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([json], { type: 'application/json' }));
+  a.download = 'palettes.json';
+  a.click();
+
+  URL.revokeObjectURL(a.href);
+};
+
+const importPalettes = () => {
+  const input = document.createElement('input');
+
+  input.type = 'file';
+  input.accept = '.json,application/json';
+
+  input.onchange = () => {
+    const file = input.files[0];
+
+    if (!file) {
+      return;
+    }
+
+    const reader = new FileReader();
+
+    reader.onload = e => {
+      try {
+        const data = JSON.parse(e.target.result);
+        const imported = Array.isArray(data) ? data : null;
+
+        if (!imported || !imported.every(p => p.id && p.colors)) {
+          alert('Invalid palette file.');
+          return;
+        }
+
+        const maxId = imported.reduce((m, p) => Math.max(m, p.id), 0);
+
+        palettes = imported.map(p => ({ collapsed: false, ...p }));
+        nextId = maxId + 1;
+
+        saveToStorage();
+        render();
+      } catch (_) {
+        alert('Could not parse file.');
+      }
+    };
+
+    reader.readAsText(file);
+  };
+
+  input.click();
+};
+
 const toggleCollapse = id => {
   const p = palettes.find(x => x.id === id);
 
