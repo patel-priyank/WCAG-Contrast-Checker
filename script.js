@@ -81,9 +81,12 @@ let palettes = stored?.palettes ?? [
   {
     id: 1,
     name: 'New palette',
+    collapsed: false,
     colors: { bg: '#FFFFFF', bgAlt: '#F3F4F6', text: '#111827', textMuted: '#6B7280', accent: '#2563EB' }
   }
 ];
+
+palettes = palettes.map(p => ({ collapsed: false, ...p }));
 
 let nextId = stored?.nextId ?? 2;
 
@@ -254,8 +257,11 @@ const paletteHtml = p => {
   });
 
   return `
-    <div class="palette-card" id="palette-${p.id}">
+    <div class="palette-card${p.collapsed ? ' collapsed' : ''}" id="palette-${p.id}">
       <div class="palette-header">
+        <button class="collapse-btn" onclick="toggleCollapse(${p.id})" aria-label="${p.collapsed ? 'Expand' : 'Collapse'} palette">
+          <i class="ph ph-caret-down"></i>
+        </button>
         <input class="palette-name-input" type="text" value="${p.name}" placeholder="Palette name…" oninput="onName(${p.id},this.value)">
         <button class="remove-palette-btn" onclick="removePalette(${p.id})">Remove</button>
       </div>
@@ -289,6 +295,29 @@ const paletteHtml = p => {
       </div>
     </div>
   `;
+};
+
+const toggleCollapse = id => {
+  const p = palettes.find(x => x.id === id);
+
+  if (!p) {
+    return;
+  }
+
+  p.collapsed = !p.collapsed;
+  saveToStorage();
+
+  const card = document.getElementById(`palette-${id}`);
+
+  if (card) {
+    card.classList.toggle('collapsed', p.collapsed);
+
+    const btn = card.querySelector('.collapse-btn');
+
+    if (btn) {
+      btn.setAttribute('aria-label', p.collapsed ? 'Expand palette' : 'Collapse palette');
+    }
+  }
 };
 
 const render = () => {

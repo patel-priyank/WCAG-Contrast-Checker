@@ -126,6 +126,46 @@ header h1 {
   gap: 12px;
 }
 
+.collapse-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-faint);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+  flex-shrink: 0;
+  transition: color 0.15s;
+}
+
+.collapse-btn:hover {
+  color: var(--text-muted);
+}
+
+.collapse-btn .ph {
+  font-size: 1rem;
+  transition: transform 0.2s ease;
+}
+
+.palette-card.collapsed .collapse-btn .ph {
+  transform: rotate(-90deg);
+}
+
+.palette-card.collapsed .color-inputs-row,
+.palette-card.collapsed .results-area {
+  display: none;
+}
+
+.palette-card.collapsed .palette-header {
+  border-bottom: none;
+}
+
+.palette-card.collapsed .remove-palette-btn,
+.palette-list > .palette-card:only-child .remove-palette-btn {
+  display: none;
+}
+
 .palette-name-input {
   background: transparent;
   border: none;
