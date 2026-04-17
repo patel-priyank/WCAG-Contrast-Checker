@@ -8,6 +8,11 @@
   padding: 0;
 }
 
+*:focus-visible {
+  outline: 2px solid #005fcc;
+  outline-offset: 1px;
+}
+
 :root {
   --bg: #f4f4f5;
   --header-bg: #e4e4e7;
@@ -142,6 +147,7 @@ header h1 {
   gap: 6px;
   background: none;
   border: none;
+  border-radius: 2px;
   padding: 10px 14px;
   font-family: 'DM Mono', monospace;
   font-size: 0.8rem;
@@ -220,6 +226,7 @@ header h1 {
 .collapse-btn {
   background: none;
   border: none;
+  border-radius: 2px;
   cursor: pointer;
   color: var(--text-faint);
   display: flex;
@@ -326,7 +333,6 @@ header h1 {
   cursor: pointer;
   flex-shrink: 0;
   position: relative;
-  overflow: hidden;
   transition: transform 0.1s;
 }
 
@@ -341,6 +347,15 @@ header h1 {
   height: calc(100% + 8px);
   opacity: 0;
   cursor: pointer;
+}
+
+.swatch-btn input[type='color']:focus-visible {
+  outline: none;
+}
+
+.swatch-btn:focus-within {
+  outline: 2px solid #005fcc;
+  outline-offset: 1px;
 }
 
 .swatch-values {
@@ -388,8 +403,9 @@ header h1 {
   transition: border-color 0.15s;
 }
 
-.hex-input:focus {
-  border-color: var(--text);
+.hex-input:focus-visible {
+  outline: 2px solid #005fcc;
+  outline-offset: 1px;
 }
 
 .color-slot.invalid {
