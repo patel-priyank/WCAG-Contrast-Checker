@@ -11,11 +11,36 @@ const PAIRS = [
 ];
 
 const LEVELS = [
-  { label: 'AA normal', threshold: 4.5 },
-  { label: 'AA large', threshold: 3 },
-  { label: 'AA UI', threshold: 3 },
-  { label: 'AAA normal', threshold: 7 },
-  { label: 'AAA large', threshold: 4.5 }
+  {
+    label: 'AA normal',
+    sc: 'SC 1.4.3 · Contrast (Minimum)',
+    threshold: 4.5,
+    desc: 'Body text under 18pt regular (or 14pt bold). The baseline standard for readable paragraph text.'
+  },
+  {
+    label: 'AA large',
+    sc: 'SC 1.4.3 · Contrast (Minimum)',
+    threshold: 3,
+    desc: 'Large text at 18pt+ regular or 14pt+ bold. Headings and display type get a more lenient ratio.'
+  },
+  {
+    label: 'AA UI',
+    sc: 'SC 1.4.11 · Non-text Contrast',
+    threshold: 3,
+    desc: 'Buttons, inputs, icons, and focus indicators against their adjacent colors. Does not apply to text.'
+  },
+  {
+    label: 'AAA normal',
+    sc: 'SC 1.4.6 · Contrast (Enhanced)',
+    threshold: 7,
+    desc: 'Stricter standard for body text. Best for low-vision users and high-readability contexts.'
+  },
+  {
+    label: 'AAA large',
+    sc: 'SC 1.4.6 · Contrast (Enhanced)',
+    threshold: 4.5,
+    desc: 'Stricter standard for large text. The enhanced bar here matches the AA normal bar for body text.'
+  }
 ];
 
 const SLOTS = [
@@ -185,10 +210,7 @@ const tableRow = (pair, parsed) => {
     <tr>
       <td class="pair-td">
         <div class="pair-label">
-          <div class="pair-swatches">
-            <div class="pair-dot" style="background:${fgHex}"></div>
-            <div class="pair-dot" style="background:${bgHex}"></div>
-          </div>
+          <div class="pair-preview" style="background:${bgHex};color:${fgHex}">Aa</div>
           <span class="pair-text">${pair.fgLabel} on ${pair.bgLabel}</span>
         </div>
       </td>
@@ -244,7 +266,22 @@ const paletteHtml = p => {
             <tr>
               <th class="pair-th">Pair</th>
               <th>Ratio</th>
-              ${LEVELS.map(l => `<th>${l.label}</th>`).join('')}
+              ${LEVELS.map(
+                l => `
+                  <th>
+                    <div class='th-inner'>
+                      <span>${l.label}</span>
+                      <span class='tooltip-wrap'>
+                        <i class='ph ph-info tooltip-icon'></i>
+                        <div class='tooltip-box'>
+                          <div class='tooltip-sc'>${l.sc}</div>
+                          <div class='tooltip-desc'>${l.desc}</div>
+                        </div>
+                      </span>
+                    </div>
+                  </th>
+                `
+              ).join('')}
             </tr>
           </thead>
           <tbody id="tbody-${p.id}">${PAIRS.map(pair => tableRow(pair, parsed)).join('')}</tbody>
