@@ -174,6 +174,31 @@ const parseColor = str => {
   return null;
 };
 
+const toHsl = col => {
+  const max = Math.max(col.r, col.g, col.b);
+  const min = Math.min(col.r, col.g, col.b);
+  const l = (max + min) / 2;
+
+  let h = 0;
+  let s = 0;
+
+  if (max !== min) {
+    const d = max - min;
+
+    s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+
+    if (max === col.r) {
+      h = ((col.g - col.b) / d + (col.g < col.b ? 6 : 0)) / 6;
+    } else if (max === col.g) {
+      h = ((col.b - col.r) / d + 2) / 6;
+    } else {
+      h = ((col.r - col.g) / d + 4) / 6;
+    }
+  }
+
+  return `hsl(${Math.round(h * 360)}, ${Math.round(s * 100)}%, ${Math.round(l * 100)}%)`;
+};
+
 const lin = c => {
   return c <= 0.04045 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
 };
@@ -235,7 +260,10 @@ const colorSlotHtml = (p, s) => {
         <div class="swatch-btn" style="background:${hex}">
           <input type="color" value="${hex}" oninput="onPick(${p.id},'${s.key}',this.value)">
         </div>
-        <span class="swatch-hex" id="sh-${p.id}-${s.key}">${hex}</span>
+        <span class="swatch-values">
+          <span class="swatch-hex" id="sh-hex-${p.id}-${s.key}">${hex}</span>
+          <span class="swatch-hsl" id="sh-hsl-${p.id}-${s.key}">${col ? toHsl(col) : ''}</span>
+        </span>
       </div>
       <input
         class="hex-input ${invalid}"
@@ -266,6 +294,7 @@ const paletteHtml = p => {
         <button class="remove-palette-btn" onclick="removePalette(${p.id})">Remove</button>
       </div>
       <div class="color-inputs-row">${SLOTS.map(s => colorSlotHtml(p, s)).join('')}</div>
+      <div class="format-hint"><i class="ph ph-info"></i>Accepts hex (#RGB, #RRGGBB) or hsl(h, s%, l%)</div>
       <div class="results-area">
         <table class="results-table">
           <thead>
@@ -410,11 +439,17 @@ const refreshPalette = id => {
       if (pick && col) pick.value = col.hex;
     }
 
-    const sh = document.getElementById(`sh-${id}-${s.key}`);
+    const shHex = document.getElementById(`sh-hex-${id}-${s.key}`);
 
-    if (sh) {
-      sh.textContent = hex;
-      sh.style.color = col ? 'var(--text-muted)' : 'var(--fail-text)';
+    if (shHex) {
+      shHex.textContent = hex;
+      shHex.style.color = col ? 'var(--text-muted)' : 'var(--fail-text)';
+    }
+
+    const shHsl = document.getElementById(`sh-hsl-${id}-${s.key}`);
+
+    if (shHsl) {
+      shHsl.textContent = col ? toHsl(col) : '';
     }
 
     const inp = document.getElementById(`ci-${id}-${s.key}`);

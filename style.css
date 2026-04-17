@@ -198,6 +198,7 @@ header h1 {
 }
 
 .palette-card.collapsed .color-inputs-row,
+.palette-card.collapsed .format-hint,
 .palette-card.collapsed .results-area {
   display: none;
 }
@@ -262,13 +263,12 @@ header h1 {
 .slot-label {
   font-size: 0.68rem;
   letter-spacing: 0.12em;
-  color: var(--text-faint);
+  color: var(--text-muted);
   margin-bottom: 9px;
 }
 
 .swatch-row {
   display: flex;
-  align-items: center;
   gap: 8px;
   margin-bottom: 7px;
 }
@@ -298,9 +298,32 @@ header h1 {
   cursor: pointer;
 }
 
-.swatch-hex {
-  font-size: 0.72rem;
-  color: var(--text-muted);
+.swatch-values {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.swatch-hex,
+.swatch-hsl {
+  font-size: 0.68rem;
+  color: var(--text-faint);
+}
+
+.format-hint {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 1rem;
+  font-size: 0.65rem;
+  letter-spacing: 0.04em;
+  color: var(--text-faint);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.format-hint .ph {
+  font-size: 1rem;
+  flex-shrink: 0;
 }
 
 .hex-input {
