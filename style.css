@@ -298,7 +298,11 @@ header h1 {
   gap: 2px;
 }
 
-.swatch-hex,
+.swatch-hex {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+}
+
 .swatch-hsl {
   font-size: 0.68rem;
   color: var(--text-faint);
@@ -337,8 +341,8 @@ header h1 {
   border-color: var(--text);
 }
 
-.hex-input.invalid {
-  border-color: #e24b4a;
+.color-slot.invalid {
+  background: rgba(226, 75, 74, 0.12);
 }
 
 .results-area {

@@ -254,7 +254,7 @@ const colorSlotHtml = (p, s) => {
   const invalid = p.colors[s.key] && !col ? 'invalid' : '';
 
   return `
-    <div class="color-slot">
+    <div class="color-slot ${invalid}">
       <div class="slot-label">${s.label}</div>
       <div class="swatch-row">
         <div class="swatch-btn" style="background:${hex}">
@@ -266,7 +266,7 @@ const colorSlotHtml = (p, s) => {
         </span>
       </div>
       <input
-        class="hex-input ${invalid}"
+        class="hex-input"
         id="ci-${p.id}-${s.key}"
         type="text"
         value="${p.colors[s.key]}"
@@ -455,7 +455,7 @@ const refreshPalette = id => {
     const inp = document.getElementById(`ci-${id}-${s.key}`);
 
     if (inp) {
-      inp.classList.toggle('invalid', !!(p.colors[s.key] && !col));
+      inp.closest('.color-slot').classList.toggle('invalid', !!(p.colors[s.key] && !col));
     }
   });
 
