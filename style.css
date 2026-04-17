@@ -10,6 +10,7 @@
 
 :root {
   --bg: #f4f4f5;
+  --header-bg: #e4e4e7;
   --surface: #ffffff;
   --border: #d1d5db;
   --border-light: #e5e7eb;
@@ -25,6 +26,24 @@
   --fail-border: #f0b4b4;
 }
 
+[data-theme='dark'] {
+  --bg: #18181b;
+  --header-bg: #27272a;
+  --surface: #27272a;
+  --border: #3f3f46;
+  --border-light: #3f3f46;
+  --text: #f4f4f5;
+  --text-muted: #a1a1aa;
+  --text-faint: #71717a;
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.3), 0 4px 16px rgba(0, 0, 0, 0.2);
+  --pass-bg: #14291a;
+  --pass-text: #86efac;
+  --pass-border: #166534;
+  --fail-bg: #2d1515;
+  --fail-text: #fca5a5;
+  --fail-border: #7f1d1d;
+}
+
 body {
   font-family: 'DM Mono', monospace;
   background: var(--bg);
@@ -37,12 +56,46 @@ body:has(.screen-size-overlay.visible) {
 }
 
 header {
-  background: var(--text);
-  color: var(--bg);
+  background: var(--header-bg);
+  color: var(--text);
   padding: 1.5rem 2rem;
   display: flex;
-  align-items: baseline;
+  align-items: center;
+  justify-content: space-between;
   gap: 1.5rem;
+}
+
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.theme-btn {
+  display: flex;
+  background: transparent;
+  border: none;
+  color: var(--text-faint);
+  cursor: pointer;
+  padding: 10px 16px;
+  font-size: 1.25rem;
+  line-height: 1;
+  transition:
+    background 0.15s,
+    color 0.15s;
+}
+
+.theme-btn:hover {
+  color: var(--text-muted);
+  background: var(--border-light);
+}
+
+.theme-btn.active {
+  background: var(--border);
+  color: var(--text);
 }
 
 header h1 {

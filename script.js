@@ -51,7 +51,7 @@ const SLOTS = [
   { key: 'accent', label: 'accent' }
 ];
 
-const STORAGE_KEY = 'wcag-palettes';
+const STORAGE_KEY = 'contrast-checker-palettes';
 
 const loadFromStorage = () => {
   try {
@@ -540,6 +540,25 @@ const removePalette = id => {
     }, 150);
   }
 };
+
+const THEME_KEY = 'contrast-checker-theme';
+
+const applyTheme = pref => {
+  document.documentElement.setAttribute('data-theme', pref);
+
+  document.querySelectorAll('.theme-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.theme === pref);
+  });
+};
+
+const setTheme = pref => {
+  localStorage.setItem(THEME_KEY, pref);
+  applyTheme(pref);
+};
+
+applyTheme(
+  localStorage.getItem(THEME_KEY) ?? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+);
 
 render();
 
