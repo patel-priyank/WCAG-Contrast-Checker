@@ -66,6 +66,7 @@ header {
   z-index: 1000;
   background: var(--header-bg);
   color: var(--text);
+  border-bottom: 4px solid var(--bg);
 }
 
 .header-inner {
