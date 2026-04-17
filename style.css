@@ -61,6 +61,9 @@ body:has(.screen-size-overlay.visible) {
 }
 
 header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
   background: var(--header-bg);
   color: var(--text);
 }
@@ -607,7 +610,7 @@ header h1 {
   display: none;
   position: fixed;
   inset: 0;
-  z-index: 9999;
+  z-index: 2000;
   background: var(--bg);
   align-items: center;
   justify-content: center;
