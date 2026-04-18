@@ -286,8 +286,11 @@ const paletteHtml = p => {
   });
 
   return `
-    <div class="palette-card${p.collapsed ? ' collapsed' : ''}" id="palette-${p.id}">
+    <div class="palette-card${p.collapsed ? ' collapsed' : ''}" id="palette-${p.id}" draggable="false" data-id="${p.id}">
       <div class="palette-header">
+        <button class="drag-handle" aria-label="Drag to reorder palette">
+          <i class="ph ph-dots-six-vertical"></i>
+        </button>
         <button class="collapse-btn" onclick="toggleCollapse(${p.id})" aria-label="${p.collapsed ? 'Expand' : 'Collapse'} palette">
           <i class="ph ph-caret-down"></i>
         </button>
@@ -418,6 +421,81 @@ const render = () => {
   const n = palettes.length;
 
   document.getElementById('count-label').textContent = n + (n === 1 ? ' palette' : ' palettes');
+
+  initDragAndDrop();
+};
+
+let dragSrcId = null;
+
+const initDragAndDrop = () => {
+  const list = document.getElementById('palette-list');
+  const cards = list.querySelectorAll('.palette-card');
+
+  cards.forEach(card => {
+    const handle = card.querySelector('.drag-handle');
+
+    handle.addEventListener('mousedown', () => {
+      card.draggable = true;
+    });
+
+    handle.addEventListener('mouseup', () => {
+      card.draggable = false;
+    });
+
+    card.addEventListener('dragstart', e => {
+      dragSrcId = Number(card.dataset.id);
+
+      e.dataTransfer.effectAllowed = 'move';
+
+      requestAnimationFrame(() => card.classList.add('dragging'));
+    });
+
+    card.addEventListener('dragend', () => {
+      card.draggable = false;
+      card.classList.remove('dragging');
+
+      list.querySelectorAll('.palette-card').forEach(c => c.classList.remove('drag-over'));
+    });
+
+    card.addEventListener('dragover', e => {
+      e.preventDefault();
+      e.dataTransfer.dropEffect = 'move';
+
+      const targetId = Number(card.dataset.id);
+
+      if (targetId === dragSrcId) {
+        return;
+      }
+
+      list.querySelectorAll('.palette-card').forEach(c => c.classList.remove('drag-over'));
+
+      card.classList.add('drag-over');
+    });
+
+    card.addEventListener('drop', e => {
+      e.preventDefault();
+
+      const targetId = Number(card.dataset.id);
+
+      if (targetId === dragSrcId) {
+        return;
+      }
+
+      const srcIdx = palettes.findIndex(p => p.id === dragSrcId);
+      const tgtIdx = palettes.findIndex(p => p.id === targetId);
+
+      if (srcIdx === -1 || tgtIdx === -1) {
+        return;
+      }
+
+      const [moved] = palettes.splice(srcIdx, 1);
+
+      palettes.splice(tgtIdx, 0, moved);
+
+      saveToStorage();
+      render();
+    });
+  });
 };
 
 const refreshPalette = id => {

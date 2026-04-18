@@ -87,6 +87,7 @@ header {
 }
 
 .coffee-btn {
+  align-self: stretch;
   display: flex;
   align-items: center;
   gap: 6px;
@@ -254,6 +255,42 @@ header h1 {
   padding: 1rem 1.25rem;
   border-bottom: 1px solid var(--border-light);
   gap: 12px;
+}
+
+.drag-handle {
+  background: none;
+  border: none;
+  border-radius: 2px;
+  cursor: grab;
+  color: var(--text-faint);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+  flex-shrink: 0;
+  transition: color 0.15s;
+  touch-action: none;
+}
+
+.drag-handle:hover {
+  color: var(--text-muted);
+}
+
+.drag-handle:active {
+  cursor: grabbing;
+}
+
+.drag-handle .ph {
+  font-size: 1rem;
+}
+
+.palette-card.dragging {
+  opacity: 0.4;
+}
+
+.palette-card.drag-over {
+  outline: 2px solid var(--text-muted);
+  outline-offset: 2px;
 }
 
 .collapse-btn {
