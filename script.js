@@ -342,6 +342,10 @@ const exportPalettes = () => {
 };
 
 const importPalettes = () => {
+  if (!confirm('Importing will replace all current palettes. Continue?')) {
+    return;
+  }
+
   const input = document.createElement('input');
 
   input.type = 'file';
@@ -618,7 +622,7 @@ const removePalette = id => {
 
   const p = palettes.find(x => x.id === id);
 
-  if (!confirm(`Remove ${p?.name?.trim() ? `"${p.name.trim()}"` : 'this palette'}?`)) {
+  if (!confirm('Remove palette?')) {
     return;
   }
 
