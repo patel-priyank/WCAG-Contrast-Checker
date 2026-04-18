@@ -615,6 +615,24 @@ const addPalette = () => {
   }
 };
 
+const collapseAll = () => {
+  palettes.forEach(p => {
+    p.collapsed = true;
+  });
+
+  saveToStorage();
+  render();
+};
+
+const expandAll = () => {
+  palettes.forEach(p => {
+    p.collapsed = false;
+  });
+
+  saveToStorage();
+  render();
+};
+
 const resetPalettes = () => {
   if (!confirm('Reset to default palette?')) {
     return;
