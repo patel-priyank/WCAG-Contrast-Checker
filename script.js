@@ -289,16 +289,16 @@ const paletteHtml = p => {
     <div class="palette-card${p.collapsed ? ' collapsed' : ''}" id="palette-${p.id}" draggable="false" data-id="${p.id}">
       <div class="palette-header">
         <button class="drag-handle" aria-label="Drag to reorder palette">
-          <i class="ph ph-dots-six-vertical"></i>
+          <i class="ph-bold ph-dots-six-vertical"></i>
         </button>
         <button class="collapse-btn" onclick="toggleCollapse(${p.id})" aria-label="${p.collapsed ? 'Expand' : 'Collapse'} palette">
-          <i class="ph ph-caret-down"></i>
+          <i class="ph-bold ph-caret-down"></i>
         </button>
         <input class="palette-name-input" type="text" value="${p.name}" placeholder="Palette name" oninput="onName(${p.id},this.value)">
         <button class="remove-palette-btn" onclick="removePalette(${p.id})">Remove</button>
       </div>
       <div class="color-inputs-row">${SLOTS.map(s => colorSlotHtml(p, s)).join('')}</div>
-      <div class="format-hint"><i class="ph ph-info"></i>Accepts hex (#rgb, #rrggbb) or hsl(h, s%, l%)</div>
+      <div class="format-hint"><i class="ph-bold ph-info"></i>Accepts hex (#rgb, #rrggbb) or hsl(h, s%, l%)</div>
       <div class="results-area">
         <table class="results-table">
           <thead>
@@ -311,7 +311,7 @@ const paletteHtml = p => {
                     <div class='th-inner'>
                       <span>${l.label}</span>
                       <span class='tooltip-wrap'>
-                        <i class='ph ph-info tooltip-icon'></i>
+                        <i class='ph-bold ph-info tooltip-icon'></i>
                         <div class='tooltip-box'>
                           <div class='tooltip-sc'>${l.sc}</div>
                           <div class='tooltip-desc'>${l.desc}</div>
@@ -668,7 +668,7 @@ const applyTheme = pref => {
   const label = document.getElementById('theme-label');
 
   if (label) {
-    label.className = pref === 'dark' ? 'ph ph-sun' : 'ph ph-moon';
+    label.className = pref === 'dark' ? 'ph-bold ph-sun' : 'ph-bold ph-moon';
   }
 };
 
