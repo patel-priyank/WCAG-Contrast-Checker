@@ -615,6 +615,25 @@ const addPalette = () => {
   }
 };
 
+const resetPalettes = () => {
+  if (!confirm('Reset to default palette?')) {
+    return;
+  }
+
+  palettes = [
+    {
+      id: 1,
+      name: 'Palette 1',
+      collapsed: false,
+      colors: { bg: '#000', bgAlt: '#3a3a3a', text: '#fff', textMuted: '#ccc', accent: 'hsl(200, 80%, 80%)' }
+    }
+  ];
+
+  nextId = 2;
+  saveToStorage();
+  render();
+};
+
 const removePalette = id => {
   if (palettes.length === 1) {
     return;

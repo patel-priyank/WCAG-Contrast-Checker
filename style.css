@@ -157,10 +157,35 @@ header h1 {
   margin-bottom: 1.25rem;
 }
 
+.count-group {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+}
+
 .count-label {
   font-size: 0.75rem;
   letter-spacing: 0.1em;
   color: var(--text-muted);
+  line-height: 1;
+}
+
+.reset-btn {
+  background: none;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  color: var(--text-faint);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  padding: 0 6px;
+  line-height: 1;
+  transition: color 0.15s;
+}
+
+.reset-btn:hover {
+  color: var(--fail-text);
 }
 
 .toolbar-right {
