@@ -331,6 +331,22 @@ header h1 {
   display: none;
 }
 
+.header-swatches {
+  display: flex;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.header-swatch {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background-image: repeating-conic-gradient(#ccc 0% 25%, #fff 0% 50%);
+  background-size: 4px 4px;
+  background-origin: border-box;
+}
+
 .palette-name-input {
   background: transparent;
   border: none;
@@ -342,6 +358,7 @@ header h1 {
   outline: none;
   flex: 1;
   min-width: 0;
+  margin-left: 8px;
 }
 
 .palette-name-input::placeholder {
@@ -478,6 +495,12 @@ header h1 {
 
 .color-slot.invalid {
   background: rgba(226, 75, 74, 0.12);
+}
+
+.color-slot.invalid .swatch-btn {
+  background-image: repeating-conic-gradient(#ccc 0% 25%, #fff 0% 50%);
+  background-size: 6px 6px;
+  background-origin: border-box;
 }
 
 .results-area {

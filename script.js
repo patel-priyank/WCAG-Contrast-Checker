@@ -232,6 +232,7 @@ const tableRow = (pair, parsed) => {
     const pass = r ? r >= l.threshold : null;
     const cls = pass === null ? 'na' : pass ? 'pass' : 'fail';
     const txt = pass === null ? '—' : pass ? 'Pass' : 'Fail';
+
     return `<td><div class="pill ${cls}">${txt}</div></td>`;
   }).join('');
 
@@ -258,11 +259,11 @@ const colorSlotHtml = (p, s) => {
     <div class="color-slot ${invalid}">
       <div class="slot-label">${s.label}</div>
       <div class="swatch-row">
-        <div class="swatch-btn" style="background:${hex}">
+        <div class="swatch-btn" style="${col ? `background:${hex}` : ''}">
           <input type="color" value="${hex}" oninput="onPick(${p.id},'${s.key}',this.value)">
         </div>
         <span class="swatch-values">
-          <span class="swatch-hex" id="sh-hex-${p.id}-${s.key}" style="color:${col ? 'var(--text-muted)' : 'var(--fail-text)'}">${hex}</span>
+          <span class="swatch-hex" id="sh-hex-${p.id}-${s.key}" style="color:${col ? 'var(--text-muted)' : 'var(--fail-text)'}">${col ? hex : ''}</span>
           <span class="swatch-hsl" id="sh-hsl-${p.id}-${s.key}">${col ? toHsl(col) : ''}</span>
         </span>
       </div>
@@ -271,7 +272,7 @@ const colorSlotHtml = (p, s) => {
         id="ci-${p.id}-${s.key}"
         type="text"
         value="${p.colors[s.key]}"
-        placeholder="#000000"
+        placeholder="#rrggbb"
         oninput="onText(${p.id},'${s.key}',this.value)"
       >
     </div>
@@ -294,6 +295,12 @@ const paletteHtml = p => {
         <button class="collapse-btn" onclick="toggleCollapse(${p.id})" aria-label="${p.collapsed ? 'Expand' : 'Collapse'} palette">
           <i class="ph-bold ph-caret-down"></i>
         </button>
+        <div class="header-swatches">
+          ${SLOTS.map(s => {
+            const col = parsed[s.key];
+            return `<span class="header-swatch" id="hs-${p.id}-${s.key}" style="${col ? `background:${col.hex}` : ''}"></span>`;
+          }).join('')}
+        </div>
         <input class="palette-name-input" type="text" value="${p.name}" placeholder="Palette name" oninput="onName(${p.id},this.value)">
         <button class="remove-palette-btn" onclick="removePalette(${p.id})">Remove</button>
       </div>
@@ -334,6 +341,7 @@ const exportPalettes = () => {
   const json = JSON.stringify(palettes, null, 2);
 
   const a = document.createElement('a');
+
   a.href = URL.createObjectURL(new Blob([json], { type: 'application/json' }));
   a.download = 'palettes.json';
   a.click();
@@ -525,15 +533,25 @@ const refreshPalette = id => {
       ?.querySelector('.swatch-btn');
 
     if (btn) {
-      btn.style.background = hex;
+      btn.style.background = col ? hex : '';
+
       const pick = btn.querySelector('input[type=color]');
-      if (pick && col) pick.value = col.hex;
+
+      if (pick && col) {
+        pick.value = col.hex;
+      }
+    }
+
+    const hs = document.getElementById(`hs-${id}-${s.key}`);
+
+    if (hs) {
+      hs.style.background = col ? hex : '';
     }
 
     const shHex = document.getElementById(`sh-hex-${id}-${s.key}`);
 
     if (shHex) {
-      shHex.textContent = hex;
+      shHex.textContent = col ? hex : '';
       shHex.style.color = col ? 'var(--text-muted)' : 'var(--fail-text)';
     }
 
