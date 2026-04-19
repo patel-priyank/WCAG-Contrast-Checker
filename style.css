@@ -86,11 +86,10 @@ header {
   flex-shrink: 0;
 }
 
-.coffee-btn,
-.theme-toggle-btn,
-.github-btn {
+.header-btn {
   display: flex;
   align-items: center;
+  align-self: stretch;
   background: var(--text);
   color: var(--bg);
   border: none;
@@ -104,19 +103,11 @@ header {
   transition: opacity 0.15s;
 }
 
-.coffee-btn,
-.theme-toggle-btn {
-  align-self: stretch;
-}
-
-.coffee-btn .ph-bold,
-.theme-toggle-btn .ph-bold {
+.header-btn .ph-bold {
   font-size: 1rem;
 }
 
-.coffee-btn:hover,
-.theme-toggle-btn:hover,
-.github-btn:hover {
+.header-btn:hover {
   opacity: 0.8;
 }
 
@@ -723,7 +714,7 @@ header h1 {
 
 .scroll-top-btn {
   position: fixed;
-  bottom: 2rem;
+  bottom: 1.75rem;
   left: 50%;
   transform: translateX(-50%);
   background: var(--text);
