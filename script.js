@@ -302,6 +302,7 @@ const paletteHtml = p => {
           }).join('')}
         </div>
         <input class="palette-name-input" type="text" value="${p.name}" placeholder="Palette name" oninput="onName(${p.id},this.value)">
+        <i class="ph-bold ph-warning-circle palette-warning-icon" id="pw-${p.id}" title="One or more colors are invalid" style="${SLOTS.some(s => !parsed[s.key]) ? '' : 'display:none'}"></i>
         <button class="remove-palette-btn" onclick="removePalette(${p.id})">Remove</button>
       </div>
       <div class="color-inputs-row">${SLOTS.map(s => colorSlotHtml(p, s)).join('')}</div>
@@ -567,6 +568,12 @@ const refreshPalette = id => {
       inp.closest('.color-slot').classList.toggle('invalid', !col);
     }
   });
+
+  const pw = document.getElementById(`pw-${id}`);
+
+  if (pw) {
+    pw.style.display = SLOTS.some(s => !parsed[s.key]) ? '' : 'none';
+  }
 
   const tbody = document.getElementById(`tbody-${id}`);
 

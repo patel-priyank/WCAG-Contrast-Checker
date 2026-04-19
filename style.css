@@ -341,9 +341,9 @@ header h1 {
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  border: 1px solid var(--border);
-  background-image: repeating-conic-gradient(#ccc 0% 25%, #fff 0% 50%);
-  background-size: 4px 4px;
+  border: 1px solid #888;
+  background-image: repeating-conic-gradient(#888 0% 25%, #fff 0% 50%);
+  background-size: 8px 8px;
   background-origin: border-box;
 }
 
@@ -358,7 +358,7 @@ header h1 {
   outline: none;
   flex: 1;
   min-width: 0;
-  margin-left: 8px;
+  margin-left: 10px;
 }
 
 .palette-name-input::placeholder {
@@ -498,9 +498,21 @@ header h1 {
 }
 
 .color-slot.invalid .swatch-btn {
-  background-image: repeating-conic-gradient(#ccc 0% 25%, #fff 0% 50%);
-  background-size: 6px 6px;
+  background-image: repeating-conic-gradient(#888 0% 25%, #fff 0% 50%);
+  background-size: 12px 12px;
   background-origin: border-box;
+}
+
+.palette-warning-icon {
+  font-size: 1rem;
+  color: #ffffff;
+  background: #d97706;
+  flex-shrink: 0;
+  align-self: stretch;
+  padding: 0 8px;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
 }
 
 .results-area {
