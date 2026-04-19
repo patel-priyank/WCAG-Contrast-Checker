@@ -48,17 +48,15 @@
 
     <div class="main">
       <div class="toolbar">
-        <div class="count-group">
-          <span class="count-label" id="count-label">1 palette</span>
+        <div class="collapse-all-group">
+          <button class="io-btn" onclick="collapseAll()">
+            <i class="ph-bold ph-arrows-in-simple"></i>Collapse all
+          </button>
 
-          <button class="reset-btn" onclick="resetPalettes()" id="reset-btn">Reset</button>
-
-          <div class="collapse-all-group">
-            <button class="collapse-all-btn" onclick="collapseAll()">Collapse all</button>
-
-            <button class="collapse-all-btn" onclick="expandAll()">Expand all</button>
-          </div>
+          <button class="io-btn" onclick="expandAll()"><i class="ph-bold ph-arrows-out-simple"></i>Expand all</button>
         </div>
+
+        <span class="count-label" id="count-label">1 palette</span>
 
         <div class="toolbar-right">
           <div class="io-btn-group">
@@ -66,6 +64,10 @@
 
             <button class="io-btn" onclick="importPalettes()"><i class="ph-bold ph-download-simple"></i>Import</button>
           </div>
+
+          <button class="io-btn reset-btn" onclick="resetPalettes()" id="reset-btn">
+            <i class="ph-bold ph-trash"></i>Reset
+          </button>
 
           <button class="add-btn" onclick="addPalette()">Add palette</button>
         </div>

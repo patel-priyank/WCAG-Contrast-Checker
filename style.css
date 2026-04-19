@@ -86,31 +86,7 @@ header {
   flex-shrink: 0;
 }
 
-.coffee-btn {
-  align-self: stretch;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  background: none;
-  border: none;
-  border-radius: 2px;
-  padding: 10px 14px;
-  font-family: 'DM Mono', monospace;
-  font-size: 0.8rem;
-  letter-spacing: 0.06em;
-  color: var(--text-muted);
-  cursor: pointer;
-  transition: backdrop-filter 0.15s;
-}
-
-.coffee-btn:hover {
-  backdrop-filter: brightness(1.5);
-}
-
-.coffee-btn .ph-bold {
-  font-size: 1rem;
-}
-
+.coffee-btn,
 .theme-toggle-btn,
 .github-btn {
   display: flex;
@@ -128,10 +104,17 @@ header {
   transition: opacity 0.15s;
 }
 
+.coffee-btn,
 .theme-toggle-btn {
   align-self: stretch;
 }
 
+.coffee-btn .ph-bold,
+.theme-toggle-btn .ph-bold {
+  font-size: 1rem;
+}
+
+.coffee-btn:hover,
 .theme-toggle-btn:hover,
 .github-btn:hover {
   opacity: 0.8;
@@ -153,14 +136,9 @@ header h1 {
 .toolbar {
   display: flex;
   align-items: center;
+  gap: 20px;
   justify-content: space-between;
   margin-bottom: 1.25rem;
-}
-
-.count-group {
-  display: flex;
-  align-items: baseline;
-  gap: 16px;
 }
 
 .count-label {
@@ -170,46 +148,10 @@ header h1 {
   line-height: 1;
 }
 
-.reset-btn {
-  background: none;
-  border: none;
-  border-radius: 2px;
-  cursor: pointer;
-  color: var(--text-faint);
-  font-family: 'DM Mono', monospace;
-  font-size: 0.72rem;
-  letter-spacing: 0.08em;
-  padding: 3px 6px;
-  line-height: 1;
-  transition: color 0.15s;
-}
-
-.reset-btn:hover {
-  color: var(--fail-text);
-}
-
 .collapse-all-group {
   display: flex;
   align-items: center;
   gap: 2px;
-}
-
-.collapse-all-btn {
-  background: none;
-  border: none;
-  border-radius: 2px;
-  cursor: pointer;
-  color: var(--text-faint);
-  font-family: 'DM Mono', monospace;
-  font-size: 0.72rem;
-  letter-spacing: 0.08em;
-  padding: 3px 6px;
-  line-height: 1;
-  transition: color 0.15s;
-}
-
-.collapse-all-btn:hover {
-  color: var(--text);
 }
 
 .toolbar-right {
@@ -245,6 +187,11 @@ header h1 {
 .io-btn:hover {
   background: var(--border-light);
   color: var(--text);
+}
+
+.reset-btn:hover {
+  background: rgba(226, 75, 74, 0.12);
+  color: var(--fail-text);
 }
 
 .io-btn .ph-bold {
