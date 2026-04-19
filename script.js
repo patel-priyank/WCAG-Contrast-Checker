@@ -718,3 +718,13 @@ const check = () => {
 check();
 
 window.addEventListener('resize', check);
+
+const scrollTopBtn = document.getElementById('scroll-top-btn');
+
+window.addEventListener(
+  'scroll',
+  () => {
+    scrollTopBtn.classList.toggle('visible', window.scrollY > 200);
+  },
+  { passive: true }
+);

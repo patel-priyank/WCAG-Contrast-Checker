@@ -684,3 +684,40 @@ header h1 {
   font-size: 12px;
   color: var(--text-faint);
 }
+
+.scroll-top-btn {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--text);
+  color: var(--bg);
+  border: none;
+  border-radius: 2px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 999;
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 0.2s,
+    transform 0.2s;
+}
+
+.scroll-top-btn.visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(-50%);
+}
+
+.scroll-top-btn:hover {
+  opacity: 0.8;
+}
+
+.scroll-top-btn .ph-bold {
+  font-size: 1rem;
+}
